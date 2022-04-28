@@ -30,7 +30,6 @@ struct SearchView: View {
     @State var userText: String = ""
     
     var body: some View {
-        TabView{
         NavigationView{
             VStack{
                 Spacer()
@@ -66,13 +65,7 @@ struct SearchView: View {
                     Spacer()
                 }
             }
-        }.navigationViewStyle(StackNavigationViewStyle()).tabItem{
-            Label("Menu", systemImage: "test")
-        }
-            Text("HERERER").tabItem{
-                Label("Nice", systemImage: "test")
-            }
-    }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
