@@ -143,6 +143,9 @@ struct ComicView: View {
                     
                     Spacer()
                 }.padding()
+                Button("Add Title"){
+                    print("Hello")
+                }
                 ChapterList(chapters:chapters)
             }.navigationBarTitleDisplayMode(.inline)
     }

@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct ComicAppApp: App {
+    @StateObject private var dataController = DataController()
+    
     var body: some Scene {
         WindowGroup {
+            UserListView().environment(\.managedObjectContext, dataController.container.viewContext)
             //GenreView()
-            SearchView()
+            //SearchView()
             //MainView()
             //ComicView(comicURL: "https://readmanganato.com/manga-aa951409")
         }
