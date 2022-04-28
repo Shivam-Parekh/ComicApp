@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ActivityIndicatorView",
+        "repositoryURL": "https://github.com/exyte/ActivityIndicatorView",
+        "state": {
+          "branch": null,
+          "revision": "9ddf7c4290ed79d6d09a58fb644a3cc2ff751542",
+          "version": "1.0.1"
+        }
+      },
+      {
+        "package": "Request",
+        "repositoryURL": "https://github.com/carson-katri/swift-request",
+        "state": {
+          "branch": null,
+          "revision": "6266d884d7ded618cceb0e0920431be4d6f4c4aa",
+          "version": "1.4.0"
+        }
+      },
+      {
+        "package": "SwiftSoup",
+        "repositoryURL": "https://github.com/scinfu/SwiftSoup",
+        "state": {
+          "branch": null,
+          "revision": "41e7c263fb8c277e980ebcb9b0b5f6031d3d4886",
+          "version": "2.4.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
