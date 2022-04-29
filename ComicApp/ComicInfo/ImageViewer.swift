@@ -21,6 +21,8 @@ struct TabofView: View {
     @State private var firstPage:Int
     @State private var lastPage:Int
     @State private var click = false
+    @State private var prevTotalChapPages = 100000
+    @State private var hitPrev = false
     var colors = ["Red", "Green", "Blue", "Tartan"]
     @State private var selectedColor = "Red"
     private var chapters:[String]
@@ -89,7 +91,14 @@ struct TabofView: View {
     var body: some View {
         ZStack{
         VStack{
-            if currentImage == (thisChapter.num + 1){
+            if hitPrev && currentImage == 0 && prevTotalChapPages > lastPage{
+                Text("MADE ITTTTT").onAppear{
+                    hitPrev = false
+                    currentImage = lastPage
+                }
+            }
+            
+            else if currentImage == (thisChapter.num + 1){
                 nextChapter()
             }
             else if currentImage == 0{
@@ -168,10 +177,16 @@ struct TabofView: View {
                             ToolbarItemGroup(placement: .bottomBar) { // 3
                                 Button("PC") {
                                     currentImage = firstPage
+                                    hitPrev = true
+                                    prevTotalChapPages = lastPage
                                 }
                                 Spacer()
                                 Button("P"){
                                     if(!(firstPage == currentImage && chapters.firstIndex(of: thisChapter.tabrefURL) == chapters.count-1)){
+                                        if(firstPage+1 == currentImage){
+                                            hitPrev = true
+                                            prevTotalChapPages = lastPage
+                                        }
                                         currentImage -= 1
                                     }
                                 }
