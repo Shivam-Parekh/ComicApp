@@ -24,10 +24,13 @@ class ListInfo: ObservableObject {
 }
 
 struct UserListView: View {
+    @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var comicList: FetchedResults<ComicListURLS>
     
     var body: some View {
-        List(comicList) { comic in
+        List{
+            ForEach(comicList, id:\.self){ comic in
+            NavigationLink(destination: NavigationLazyView(ComicView(comicURL: comic.comicURL ?? "nil"))){
                 VStack{
                     HStack {
                         AsyncImage(url: URL(string: comic.imageURL ?? "null")){
@@ -52,7 +55,16 @@ struct UserListView: View {
                     }.padding()
                 }.navigationBarTitleDisplayMode(.inline)
             }
+            }.onDelete(perform: delete)
+        }
         
+    }
+    func delete(at offsets: IndexSet) {
+        for index in offsets {
+            let comic = comicList[index]
+            moc.delete(comic)
+        }
+        try? moc.save()
     }
 }
 

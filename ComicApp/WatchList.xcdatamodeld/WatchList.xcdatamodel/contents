@@ -6,6 +6,11 @@
         <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="lastUpdated" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="comicURL"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
         <element name="ComicListURLS" positionX="-63" positionY="-18" width="128" height="104"/>

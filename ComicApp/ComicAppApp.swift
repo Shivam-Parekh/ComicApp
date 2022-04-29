@@ -13,9 +13,9 @@ struct ComicAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            UserListView().environment(\.managedObjectContext, dataController.container.viewContext)
+            //UserListView().environment(\.managedObjectContext, dataController.container.viewContext)
             //GenreView()
-            //SearchView()
+            SearchView().environment(\.managedObjectContext, dataController.container.viewContext)
             //MainView()
             //ComicView(comicURL: "https://readmanganato.com/manga-aa951409")
         }

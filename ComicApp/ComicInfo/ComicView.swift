@@ -103,6 +103,7 @@ class ComicLoader: ObservableObject {
 }
 
 struct ComicView: View {
+    @Environment(\.managedObjectContext) var moc
     var comic: ListItem
     var comicURL: String
     var iconURL = "null"
@@ -144,7 +145,13 @@ struct ComicView: View {
                     Spacer()
                 }.padding()
                 Button("Add Title"){
-                    print("Hello")
+                    let comicLURL = ComicListURLS(context: moc)
+                    comicLURL.imageURL = thisComicLoader.iconLink
+                    comicLURL.title = thisComicLoader.title
+                    comicLURL.author = thisComicLoader.author
+                    comicLURL.comicURL = comicURL
+                    comicLURL.lastUpdated = thisComicLoader.updated
+                    try? moc.save()
                 }
                 ChapterList(chapters:chapters)
             }.navigationBarTitleDisplayMode(.inline)

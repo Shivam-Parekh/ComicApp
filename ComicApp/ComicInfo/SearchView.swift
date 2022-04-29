@@ -31,39 +31,48 @@ struct SearchView: View {
     
     var body: some View {
         NavigationView{
-            VStack{
-                Spacer()
-                NavigationLink(destination: LazyView(SomeView(urlSearch: "https://manganato.com/genre-all?type=topview",useSearch: false))){
+            TabView{
+                VStack{
                     Spacer()
-                    Text("Most Popular")
-                        .frame(width: 200, height: 100, alignment: .center)
-                        .background(Color.blue)
-                        .foregroundColor(Color.black)
-                    
-                    Spacer()
-                }
-                Spacer()
-                Section(header: Text("Seach For Item").font(.headline)) {
-                    HStack{
+                    NavigationLink(destination: LazyView(SomeView(urlSearch: "https://manganato.com/genre-all?type=topview",useSearch: false))){
                         Spacer()
-                        Section {
-                            TextField("Search...", text: $userText).textFieldStyle(RoundedBorderTextFieldStyle())
-                                .modifier(TextFieldClearButton(text: $userText))
-                                .multilineTextAlignment(.leading)
-                        }
+                        Text("Most Popular")
+                            .frame(width: 200, height: 100, alignment: .center)
+                            .background(Color.blue)
+                            .foregroundColor(Color.black)
                         
                         Spacer()
                     }
-                    NavigationLink(destination: LazyView(SomeView(urlSearch: userText,useSearch: true))){
-                        Spacer()
-                        Text("Search")
-                            .frame(width: 200, height: 30, alignment: .center)
-                            .background(Color.blue)
-                            .foregroundColor(Color.black)
-                        Spacer()
-                    }.disabled(userText == "")
                     Spacer()
+                    Section(header: Text("Seach For Item").font(.headline)) {
+                        HStack{
+                            Spacer()
+                            Section {
+                                TextField("Search...", text: $userText).textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .modifier(TextFieldClearButton(text: $userText))
+                                    .multilineTextAlignment(.leading)
+                            }
+                            
+                            Spacer()
+                        }
+                        NavigationLink(destination: LazyView(SomeView(urlSearch: userText,useSearch: true))){
+                            Spacer()
+                            Text("Search")
+                                .frame(width: 200, height: 30, alignment: .center)
+                                .background(Color.blue)
+                                .foregroundColor(Color.black)
+                            Spacer()
+                        }.disabled(userText == "")
+                        Spacer()
+                    }
+                }.tabItem{
+                    Text("First")
                 }
+                VStack{
+                    UserListView()
+                }.tabItem{
+                    Text("Second")
+            }
             }
         }.navigationViewStyle(StackNavigationViewStyle())
     }

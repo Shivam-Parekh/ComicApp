@@ -86,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				B981DBE42809AD95000464D0 /* SearchView.swift */,
+				B965A68E281B0D3100C83792 /* UserListView.swift */,
 				B982EBFB27F1E1A6000A5DD1 /* NavigationView.swift */,
 				B982EBF927F0071A000A5DD1 /* ComicView.swift */,
 				B982EC0627FE42BD000A5DD1 /* ImageViewer.swift */,
@@ -132,7 +133,6 @@
 				B9EE59CF2805323600F2319F /* TestImageView.swift */,
 				B965A68A28161CE800C83792 /* GenreView.swift */,
 				B965A68C281622B200C83792 /* GenreButton.swift */,
-				B965A68E281B0D3100C83792 /* UserListView.swift */,
 				B965A692281B475400C83792 /* WatchList.xcdatamodeld */,
 			);
 			path = ComicApp;
