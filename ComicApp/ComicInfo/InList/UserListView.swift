@@ -30,7 +30,7 @@ struct UserListView: View {
     var body: some View {
         List{
             ForEach(comicList, id:\.self){ comic in
-            NavigationLink(destination: NavigationLazyView(ComicView(comicURL: comic.comicURL ?? "nil"))){
+            NavigationLink(destination: NavigationLazyView(InListComicView(comicURL: comic.comicURL ?? "nil"))){
                 VStack{
                     HStack {
                         AsyncImage(url: URL(string: comic.imageURL ?? "null")){

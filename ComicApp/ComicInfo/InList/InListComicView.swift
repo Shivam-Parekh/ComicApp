@@ -11,7 +11,30 @@ import SwiftUI
 import Request
 import SwiftSoup
 
-class ComicLoader: ObservableObject {
+struct ChapterInfo: Identifiable {
+    var chapterArrString: String
+    var chapterUpdate: String
+    let id = UUID()
+    
+    init(chapterArrString:String, chapterUpdate:String){
+        self.chapterArrString = chapterArrString
+        self.chapterUpdate = chapterUpdate
+        
+    }
+}
+extension ChapterInfo: Equatable, Hashable{
+    static func == (lhs: ChapterInfo, rhs: ChapterInfo) -> Bool {
+        return
+            lhs.chapterArrString == rhs.chapterArrString &&
+            lhs.chapterUpdate == rhs.chapterUpdate
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(chapterArrString)
+        hasher.combine(chapterUpdate)
+    }
+}
+
+class InListComicLoader: ObservableObject {
     var iconLink: String
     var title: String
     var chapterArrString: [ChapterInfo]
@@ -43,7 +66,7 @@ class ComicLoader: ObservableObject {
             let allChapters : Elements = try contentL.getElementsByClass("a-h")
             print("HERERER")
             for k in allChapters{
-                chapterArrString.append(ChapterInfo(chapterArrString: try k.select("a").first()!.attr("href"), chapterUpdate: try k.getElementsByClass("chapter-time text-nowrap").get(1).text()))
+                chapterArrString.append(ChapterInfo(chapterArrString: try k.select("a").first()!.attr("href"), chapterUpdate: try k.getElementsByClass("chapter-time text-nowrap").first()!.attr("title")))
             }
             print("NOW EHRERE")
             chapterArrString.removeFirst()
@@ -105,7 +128,7 @@ class ComicLoader: ObservableObject {
     }
 }
 
-struct ComicView: View {
+struct InListComicView: View {
     @Environment(\.managedObjectContext) var moc
     var comic: ListItem
     var comicURL: String
@@ -148,20 +171,11 @@ struct ComicView: View {
                     Spacer()
                 }.padding()
                 ChapterList(chapters:chapters)
-                Button("Add Title"){
-                    let comicLURL = ComicListURLS(context: moc)
-                    comicLURL.imageURL = thisComicLoader.iconLink
-                    comicLURL.title = thisComicLoader.title
-                    comicLURL.author = thisComicLoader.author
-                    comicLURL.comicURL = comicURL
-                    comicLURL.lastUpdated = thisComicLoader.updated
-                    try? moc.save()
-                }
             }.navigationBarTitleDisplayMode(.inline)
     }
 }
 
-struct ComicView_Previews: PreviewProvider {
+struct InListComicView_Previews: PreviewProvider {
     static var previews: some View {
         ComicView(comicURL: "https://readmanganato.com/manga-nr990626")
     }

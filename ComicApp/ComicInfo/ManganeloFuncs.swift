@@ -116,5 +116,10 @@ func stringOfChapterNumber(useThis:String) -> String{
     return String(y)
 }
 
+func stringOfUpdate(useThis:String) -> String{
+    let x = useThis.lastIndex(of: " ")!
+    return String(useThis[..<x])
+}
+
 
 
